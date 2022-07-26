@@ -1,5 +1,5 @@
 import { login, profile, register } from '@/api/user'
-import { message } from '@/libs'
+import { message } from 'ant-design-vue'
 // import { LOGIN_TYPE_OAUTH_NO_REGISTER_CODE } from '@/constants'
 
 export default {
@@ -26,21 +26,9 @@ export default {
   },
   actions: {
     /**
-     * 注册
-     */
-    async register(context, name, payload) {
-      const { password } = payload
-      // 注册
-      return await register({
-        name: name,
-        password: password,
-      })
-    },
-    /**
      * 登录
      */
     async login(context, name, password) {
-      const { password } = payload
       const data = await login({
         name: name,
         password: password

@@ -2,15 +2,14 @@ import axios from 'axios';
 import {
     showMessage
 } from "./status"; // 引入状态码文件
-import {
-    Toast
-} from 'vant';
+import { message } from 'ant-design-vue';
+import router from '@/router/index.js';
 // 设置接口超时时间
 axios.defaults.timeout = 60000;
 
 // 请求地址，这里是动态赋值的的环境变量，下一篇会细讲，这里跳过
 // @ts-ignore
-axios.defaults.baseURL = "http://localhost:10012/api";
+axios.defaults.baseURL = import.meta.env.VITE_BASE_API;
 // import.meta.env.VITE_API_DOMAIN;
 
 //http request 拦截器
@@ -54,18 +53,24 @@ axios.interceptors.response.use(
             response
         } = error;
         if (response) {
-            if (response.data.msg) {
-                Toast(response.data.msg)
-                return Promise.reject(response.data);
-            } else {
-                Toast(showMessage(response.status))
+            if (response.status == 401) {
+                message.error(response.data.msg)
+                router.push('/login')
                 return Promise.reject(response.data);
             }
+            if (response.data.msg) {
+                message.error(response.data.msg)
+                return Promise.reject(response.data);
+            } else {
+                message.error(showMessage(response.status))
+                return Promise.reject(response.data);
+            }
+
             // if (response.data.msg)
             // return Promise.resolve(response.data.msg);
         } else {
             console.log("err", error)
-            Toast("网络连接异常,请稍后再试!")
+            message.error("网络连接异常,请稍后再试!")
             return Promise.reject();
         }
     }

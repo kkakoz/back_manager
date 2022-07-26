@@ -11,6 +11,6 @@ export const register = data => {
     return post("/users", data)
 }
 
-export const current = () => {
+export const profile = () => {
     return get("/users/local")
 }

@@ -11,7 +11,23 @@ const router = createRouter({
       path: '/',
       name: 'main',
       component: () => import('@/views/layout/index.vue'),
-      children: []
+      children: [
+        {
+          path: '/videos',
+          name: 'video',
+          component: () => import('@/views/videos/videos/index.vue'),
+        },
+        {
+          path: '/videos/add',
+          name: 'videoAdd',
+          component: () => import('@/views/videos/video_add/index.vue'),
+        },
+        {
+          path: '/collections',
+          name: 'collection',
+          component: () => import('@/views/videos/collection/index.vue'),
+        }
+      ]
     },
     {
       path: '/login',
