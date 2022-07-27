@@ -1,31 +1,25 @@
-// import OSS from 'ali-oss'
-// import {
-//     OSSURL
-// } from '@/services/api'
-// import {
-//     request,
-//     METHOD
-// } from '@/utils/request'
+import OSS from 'ali-oss'
+import {
+    get
+} from '.'
 
 
-// export async function oss() {
-//     return request(OSSURL, METHOD.GET, {})
-// }
+export const oss = () => {
+    return get('/oss/conf')
+}
 
 
-// export async function put(name, File) {
-//     var res = await oss()
-//     var data = res.data
-//     console.log("data = ", data)
-//     const client = new OSS({
-//         region: data.region,
-//         accessKeyId: data.accessKeyId,
-//         accessKeySecret: data.accessKeySecret,
-//         bucket: data.bucket,
-//     })
-//     return client.put(name, File)
-// }
+export function put(name, File, data) {
+    console.log("data = ", data)
+    const client = new OSS({
+        region: data.region,
+        accessKeyId: data.accessKeyId,
+        accessKeySecret: data.accessKeySecret,
+        bucket: data.bucket,
+    })
+    return client.put(name, File)
+}
 
-// export default {
-//     put
-// }
+export default {
+    put
+}

@@ -1,16 +1,15 @@
 <template>
   <div class=" h-12 w-full flex flex-row">
-    <a-button type="primary" @click="addVideo">添加</a-button>
+    <a-button type="primary" @click="addVideo">添加视频</a-button>
   </div>
-  <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="listData">
+  <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="videos">
     <template #footer>
       <div>
-        <b>ant design vue</b>
-        footer part
+        
       </div>
     </template>
     <template #renderItem="{ item }">
-      <a-list-item key="item.title">
+      <a-list-item key="item.name">
         <template #actions>
           <span v-for="{ type, text } in actions" :key="type">
             <component :is="type" style="margin-right: 8px" />
@@ -18,44 +17,49 @@
           </span>
         </template>
         <template #extra>
-          <img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
+          <img width="272" alt="logo" :src="item.cover" />
         </template>
-        <a-list-item-meta :description="item.description">
+        <a-list-item-meta :description="item.user_name">
           <template #title>
-            <a :href="item.href">{{ item.title }}</a>
+            <a :href="item.href">{{ item.name }}</a>
           </template>
           <template #avatar>
-            <a-avatar :src="item.avatar" />
+            <a-avatar :src="item.user_avatar" />
           </template>
         </a-list-item-meta>
-        {{ item.content }}
+        {{ item.brief }}
       </a-list-item>
     </template>
   </a-list>
 </template>
 <script setup>
 import { StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
 import { getVideos } from '@/api/video';
-import router from '../../../router';
-const listData = [];
+import router from '@/router';
+import { ref } from 'vue';
 
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    href: 'https://www.antdv.com/',
-    title: `ant design vue part ${i}`,
-    avatar: 'https://joeschmoe.io/api/v1/random',
-    description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-  });
-}
+
+const videos = ref([])
+const size = ref(0)
+const videoPage = ref(1)
 
 const pagination = {
   onChange: page => {
-    console.log(page);
+    videoPage.value = page
+    getVideos({ page: videoPage.value, pageSize: 2 }).then((res) => {
+      videos.value = []
+      res.items.forEach(element => {
+        videos.value.push(element)
+      });
+      pagination.total = res.count
+    }).catch((e) => {
+      console.log(e)
+    })
   },
-  pageSize: 3,
+  pageSize: 10,
+  total: 0,
 };
+
 const actions = [{
   type: 'StarOutlined',
   text: '156',
@@ -68,11 +72,16 @@ const actions = [{
 }];
 
 
-getVideos().then((res) => {
-  console.log(res)
+getVideos({ page: videoPage.value, pageSize: 10 }).then((res) => {
+  res.items.forEach(element => {
+    videos.value.push(element)
+  });
+  pagination.total = res.count
 }).catch((e) => {
-  console.log(err)
+  console.log(e)
 })
+
+
 
 const addVideo = () => {
   router.push('/videos/add')

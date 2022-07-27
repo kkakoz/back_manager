@@ -11,3 +11,7 @@ export const getVideo = videoId => {
     return get(`/videos/${videoId}`)
 }
 
+export const addVideo = data => {
+    console.log("data = ", data)
+    return post('/videos', data)
+}

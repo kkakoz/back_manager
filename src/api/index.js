@@ -19,7 +19,7 @@ axios.interceptors.request.use(
         if (token) {
             config.headers = {
                 'Content-Type': 'application/json;charset=UTF-8', // 传参方式json
-                "X-Authorization": token // 这里自定义配置，这里传的是token
+                "Authorization": token // 这里自定义配置，这里传的是token
             };
         } else {
             config.headers = {
@@ -89,6 +89,7 @@ export function get(url, params) {
 }
 
 export function post(url, params) {
+    console.log("post param = ", params)
     return new Promise((resolve, reject) => {
         axios.post(url, params)
             .then(res => {

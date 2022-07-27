@@ -1,6 +1,7 @@
 <template>
     <div class="flex justify-center items-center h-full">
-        <div class=" block px-3 mt-4 dark:bg-zinc-800 xl:bg-white xl:w-[388px] xl:dark:bg-zinc-900 xl:m-auto xl:mt-8 xl:py-4 xl:rounded-sm xl:shadow-lg">
+        <div
+            class=" block px-3 mt-4 dark:bg-zinc-800 xl:bg-white xl:w-[388px] xl:dark:bg-zinc-900 xl:m-auto xl:mt-8 xl:py-4 xl:rounded-sm xl:shadow-lg">
             <a-form :model="formState" name="basic" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }"
                 autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
                 <a-form-item label="用户名" name="username"
@@ -38,18 +39,20 @@ const formState = reactive({
 
 const onFinish = values => {
     console.log('Success:', values);
-    login({name: formState.username, password: formState.password}).then((res)=> {
+    login({ name: formState.username, password: formState.password }).then((res) => {
         console.log("res = ", res)
-         router.push("/")
-         localStorage.setItem("user:token", res)
-    }).catch((e)=> {
+        localStorage.setItem("user:token", res)
+        console.log("token = ", localStorage.getItem("user:token"))
+        router.push("/")
+
+    }).catch((e) => {
         console.log("e = ", e)
     })
 };
 
 
 const onFinishFailed = errorInfo => {
-    
+
     console.log('Failed:', errorInfo);
 };
 
