@@ -124,6 +124,12 @@ const upload = (action) => {
 };
 
 const uploadVideo = (action) => {
+    if (action.file.size > 100 * 1024 * 1024) {
+        message.error("请上传100mb以内文件")
+    }
+    if (action.file.name.indexOf("mp4") == -1) {
+        message.error("请上传mp4类型文件")
+    }
     var binaryData = [];
     // 传入file
     binaryData.push(action.file);
@@ -142,7 +148,7 @@ const uploadVideo = (action) => {
                 console.log("put res = ", res)
                 video.url = res.url
             }).catch((e) => {
-                console / log("put err", e)
+                console.log("put err", e)
             })
         }).catch((e) => {
             console.log(e)

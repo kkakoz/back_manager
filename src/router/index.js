@@ -26,6 +26,11 @@ const router = createRouter({
           path: '/collections',
           name: 'collection',
           component: () => import('@/views/videos/collection/index.vue'),
+        },
+        {
+          path: '/collections/add',
+          name: 'collectionAdd',
+          component: () => import('@/views/videos/collection_add/index.vue'),
         }
       ]
     },

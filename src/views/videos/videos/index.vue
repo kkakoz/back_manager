@@ -46,7 +46,7 @@ const videoPage = ref(1)
 const pagination = {
   onChange: page => {
     videoPage.value = page
-    getVideos({ page: videoPage.value, pageSize: 2 }).then((res) => {
+    getVideos({ page: videoPage.value, pageSize: 10 }).then((res) => {
       videos.value = []
       res.items.forEach(element => {
         videos.value.push(element)
