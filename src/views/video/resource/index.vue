@@ -84,7 +84,7 @@ getVideos({ page: videoPage.value, pageSize: 10 }).then((res) => {
 
 
 const addVideo = () => {
-  router.push('/videos/add')
+  router.push('/resource/add')
 }
 
 </script>

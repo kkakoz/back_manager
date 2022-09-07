@@ -3,8 +3,8 @@
         <div
             class=" block px-3 mt-4 dark:bg-zinc-800 xl:bg-white xl:w-[388px] xl:dark:bg-zinc-900 xl:m-auto xl:mt-8 xl:py-4 xl:rounded-sm xl:shadow-lg">
             <a-form :model="formState" name="basic" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }"
-                autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
-                <a-form-item label="用户名" name="username"
+                autocomplete="off" @finish="onFinish" @finishFailed="onFailed">
+                <a-form-item label="用onFailed名" name="username"
                     :rules="[{ required: true, message: 'Please input your username!' }]">
                     <a-input v-model:value="formState.username" />
                 </a-form-item>
@@ -51,7 +51,7 @@ const onFinish = values => {
 };
 
 
-const onFinishFailed = errorInfo => {
+const onFailed = errorInfo => {
 
     console.log('Failed:', errorInfo);
 };

@@ -6,5 +6,5 @@ import {
 
 
 export const getCategories = () => {
-    return get("/categories")
+    return get("/category/list")
 }

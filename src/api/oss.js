@@ -5,7 +5,7 @@ import {
 
 
 export const oss = () => {
-    return get('/oss/conf')
+    return get('/oss/get-conf')
 }
 
 

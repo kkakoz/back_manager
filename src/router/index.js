@@ -3,6 +3,8 @@ import {
   createWebHistory
 } from 'vue-router'
 
+import VideoAdd from '@/views/video/video_add/index.vue'
+
 // 创建 vueRouter 实例
 const router = createRouter({
   history: createWebHistory(),
@@ -13,24 +15,24 @@ const router = createRouter({
       component: () => import('@/views/layout/index.vue'),
       children: [
         {
-          path: '/videos',
+          path: '/resource',
+          name: 'resource',
+          component: () => import('@/views/video/resource/index.vue'),
+        },
+        {
+          path: '/resource/add',
+          name: 'resourceAdd',
+          component: () => import('@/views/video/resource_add/index.vue'),
+        },
+        {
+          path: '/video',
           name: 'video',
-          component: () => import('@/views/videos/videos/index.vue'),
+          component: () => import('@/views/video/video/index.vue'),
         },
         {
-          path: '/videos/add',
+          path: '/video/add',
           name: 'videoAdd',
-          component: () => import('@/views/videos/video_add/index.vue'),
-        },
-        {
-          path: '/collections',
-          name: 'collection',
-          component: () => import('@/views/videos/collection/index.vue'),
-        },
-        {
-          path: '/collections/add',
-          name: 'collectionAdd',
-          component: () => import('@/views/videos/collection_add/index.vue'),
+          component: VideoAdd,
         }
       ]
     },

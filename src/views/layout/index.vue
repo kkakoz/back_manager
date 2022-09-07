@@ -7,16 +7,14 @@
                     <pie-chart-outlined />
                     <span>用户管理</span>
                 </a-menu-item>
-                <a-sub-menu >
-                    <template #title>
-                        <span>
-                            <user-outlined />
-                            <span>视频管理</span>
-                        </span>
-                    </template>
-                    <a-menu-item key="/videos">稿件管理</a-menu-item>
-                    <a-menu-item key="/collections">合集管理</a-menu-item>
-                </a-sub-menu>
+                <a-menu-item key="/resource">
+                    <pie-chart-outlined />
+                    <span>稿件管理</span>
+                </a-menu-item>
+                <a-menu-item key="/video">
+                    <pie-chart-outlined />
+                    <span>视频管理</span>
+                </a-menu-item>
                 <a-menu-item key="/comments">
                     <pie-chart-outlined />
                     <span>评论管理</span>

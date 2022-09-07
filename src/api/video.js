@@ -1,17 +1,10 @@
-import {
-    post,
-    get
-} from '.';
+import { get, post } from "."
 
-export const getVideos = data => {
-    return get(`/videos`, data)
-}
-
-export const getVideo = videoId => {
-    return get(`/videos/${videoId}`)
-}
 
 export const addVideo = data => {
-    console.log("data = ", data)
-    return post('/videos', data)
+    return post('/video/add', data)
+}
+
+export const getVideos = (data)=> {
+    return get("video/page-list", data)
 }
