@@ -44,13 +44,10 @@
 <script setup>
 import {
     PieChartOutlined,
-    DesktopOutlined,
-    UserOutlined,
-    TeamOutlined,
-    FileOutlined,
 } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 import router from '@/router';
+import Login from '../login/index.vue'
 
 let collapsed = ref(false)
 let selectedKeys = ref(['1'])

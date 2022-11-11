@@ -23,3 +23,4 @@ export function put(name, File, data) {
 export default {
     put
 }
+
